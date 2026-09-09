@@ -1,0 +1,16 @@
+
+.form-container {
+  /* border: 1px solid red; */
+  padding: 15px;
+  width: 80%;
+  margin: auto
+}
+
+.form-container mat-form-field {
+  width: 100%;
+}
+
+.list-container {
+  width: 80%;
+  margin: auto;
+}

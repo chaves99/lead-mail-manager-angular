@@ -1,0 +1,23 @@
+<div style="padding: 30px;">
+  <div style="margin-bottom: 40px;">
+    <app-company-email-filter (filterOutput)="onApplyFilter($event)"></app-company-email-filter>
+  </div>
+  <app-execute-campaign-button [filter]="emailSearchFilter()"></app-execute-campaign-button>
+
+  @if(emailsResource.isLoading()) {
+    <div style="padding: 30px; margin-top: 30px;">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+  } @else {
+    @if (emailsResource.hasValue()) {
+      Total: {{ emailsResource.value().total }}
+      <mat-list>
+        @for(email of emailsResource.value().list; track $index) {
+          <mat-list-item>
+            {{ email.email }} - {{ email.count }}
+          </mat-list-item>
+        }
+      </mat-list>
+    }
+  }
+</div>

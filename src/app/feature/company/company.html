@@ -1,0 +1,59 @@
+<div style=" padding: 55px">
+  <app-company-email-filter (filterOutput)="applyFilter($event)"></app-company-email-filter>
+
+  <app-execute-campaign-button [filter]="filter()"></app-execute-campaign-button>
+
+  <div style="margin-bottom: 20px;">
+    <button matButton (click)="onPreviousPage()" [showProgress]="companyResource.isLoading()">
+      <mat-progress-spinner
+        progressIndicator
+        mode="indeterminate"
+        diameter="20"
+        aria-label="Loading"
+        tabindex=""
+      />
+      Previos page
+    </button>
+    <button matButton (click)="onNextPage()" [showProgress]="companyResource.isLoading()">
+      <mat-progress-spinner
+        progressIndicator
+        mode="indeterminate"
+        diameter="20"
+        aria-label="Loading"
+        tabindex=""
+      />
+      Next page
+    </button>
+  </div>
+
+  @if (companyResource.hasValue()) {
+  Total of companies: {{ companyResource.value().total | number }}
+  <table mat-table [dataSource]="companyResource.value().companies" class="mat-shadow-2">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cnpj">
+      <th mat-header-cell *matHeaderCellDef> CNPJ </th>
+      <td mat-cell *matCellDef="let element"> {{element.cnpj}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fantasy_name">
+      <th mat-header-cell *matHeaderCellDef> Fantasy Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.fantasyName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> E-mail </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+  }
+</div>
+

@@ -1,0 +1,57 @@
+
+<div>
+  <div class="" style="padding: 20px">
+    <h2 style="text-align: center;"> Templates </h2>
+  </div>
+  <form [formRoot]="templateForm" class="form-container">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [formField]="templateForm.name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Subject</mat-label>
+      <input matInput [formField]="templateForm.subject" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Body:</mat-label>
+      <textarea matInput rows="15" [formField]="templateForm.body" ></textarea>
+    </mat-form-field>
+
+    <div style="display: flex; justify-content: end; padding 5px;">
+      <button class="" type="button" style="margin-right: 10px;" matButton="outlined">
+        clean
+      </button>
+      <button class="" style="" matButton="outlined">
+        Save
+      </button>
+    </div>
+  </form>
+
+  <mat-list role="list" class="list-container">
+    @for(template of templates.value(); track template.id) {
+      <mat-list-item role="listitem">
+        {{ template.name}} - {{ template.subject }}
+        <button matIconButton [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onSelectTemplate(template)">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </button>
+          <button mat-menu-item (click)="onSendTest(template.id!)">
+            <mat-icon>forward_to_inbox</mat-icon>
+            Send as Test
+          </button>
+          <button mat-menu-item (click)="onDelete(template.id!)">
+            <mat-icon>delete</mat-icon>
+            Delete
+          </button>
+        </mat-menu>
+
+      </mat-list-item>
+    }
+  </mat-list>
+</div>

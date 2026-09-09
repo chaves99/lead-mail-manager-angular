@@ -1,0 +1,158 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Filter</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div style="padding: 30px;">
+
+      <!-- EMAIL EXCLUDE -->
+      <mat-form-field style="width: 100%">
+        <mat-label>Keywords to filter on email</mat-label>
+        <mat-chip-grid #chipGridEmailExclude>
+        @for (keyword of filterFormModel.emailExclude; track keyword) {
+          <mat-chip-row (removed)="onRemoveEmailExcludeKeyword(keyword)">
+            {{keyword}}
+          <button matChipRemove [attr.aria-label]="'remove template form' + keyword">
+            <mat-icon>cancel</mat-icon>
+          </button>
+          </mat-chip-row>
+        }
+        </mat-chip-grid>
+        <input
+          placeholder="Enter the keyword to exclude from Email"
+          [matChipInputFor]="chipGridEmailExclude"
+          (matChipInputTokenEnd)="onAddEmailExcludeKeyword($event)"
+        />
+      </mat-form-field>
+
+      <!-- EMAIL INCLUDE -->
+      <mat-form-field style="width: 100%">
+        <mat-label>Keywords to search on email</mat-label>
+        <mat-chip-grid #chipGridEmailInclude>
+        @for (keyword of filterFormModel.emailInclude; track keyword) {
+          <mat-chip-row (removed)="onRemoveEmailIncludeKeyword(keyword)">
+            {{keyword}}
+          <button matChipRemove [attr.aria-label]="'remove template form' + keyword">
+            <mat-icon>cancel</mat-icon>
+          </button>
+          </mat-chip-row>
+        }
+        </mat-chip-grid>
+        <input
+          placeholder="Enter the keyword to include"
+          [matChipInputFor]="chipGridEmailInclude"
+          (matChipInputTokenEnd)="onAddEmailIncludeKeyword($event)"
+        />
+      </mat-form-field>
+
+      <!-- FANTASY NAME EXCLUDE -->
+      <mat-form-field style="width: 100%">
+        <mat-label>Keywords to filter on fantasy name</mat-label>
+        <mat-chip-grid #chipGridFantasyNameExclude>
+        @for (keyword of filterFormModel.fantasyNameExclude; track keyword) {
+          <mat-chip-row (removed)="onRemoveFantasyNameExcludeKeyword(keyword)">
+            {{keyword}}
+          <button matChipRemove [attr.aria-label]="'remove template form' + keyword">
+            <mat-icon>cancel</mat-icon>
+          </button>
+          </mat-chip-row>
+        }
+        </mat-chip-grid>
+        <input
+          placeholder="Enter the keyword to exclude"
+          [matChipInputFor]="chipGridFantasyNameExclude"
+          (matChipInputTokenEnd)="onAddFantasyNameExcludeKeyword($event)"
+        />
+      </mat-form-field>
+
+      <!-- FANTASY NAME INCLUDE -->
+      <mat-form-field style="width: 100%">
+        <mat-label>Keywords to search fantasy name</mat-label>
+        <mat-chip-grid #chipGridFantasyNameInclude>
+        @for (keyword of filterFormModel.fantasyNameInclude; track keyword) {
+          <mat-chip-row (removed)="onRemoveFantasyNameIncludeKeyword(keyword)">
+            {{keyword}}
+          <button matChipRemove [attr.aria-label]="'remove template form' + keyword">
+            <mat-icon>cancel</mat-icon>
+          </button>
+          </mat-chip-row>
+        }
+        </mat-chip-grid>
+        <input
+          placeholder="Enter the keyword to include"
+          [matChipInputFor]="chipGridFantasyNameInclude"
+          (matChipInputTokenEnd)="onAddFantasyNameIncludeKeyword($event)"
+        />
+      </mat-form-field>
+
+      <!-- SINCE FROM DATE FIELD -->
+      <mat-form-field style="margin-top: 5px;">
+        <mat-label>Email enviado apartir de</mat-label>
+        <input matInput [matDatepicker]="dp3" disabled>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #dp3 disabled="false"></mat-datepicker>
+      </mat-form-field>
+
+      <!-- QUANTITY SENT -->
+      <mat-form-field style="margin-left: 10px;margin-top: 20px; width: auto;">
+        <mat-label>Quantity Sent</mat-label>
+        <input matInput type="number" [(ngModel)]="filterFormModel.sentQuantity" />
+      </mat-form-field>
+
+      <!-- MOTHER/BRANCH COMPANY -->
+      <mat-button-toggle-group style="margin-left: 10px;">
+        <mat-button-toggle checked>None</mat-button-toggle>
+        <mat-button-toggle (click)="onUpdateMotherBranch(1)">Mother</mat-button-toggle>
+        <mat-button-toggle (click)="onUpdateMotherBranch(2)">Branch</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <!-- CNAE -->
+      <mat-form-field style="width: 100%">
+        <!-- <mat-label>CNAE</mat-label> -->
+        <input type="text" [formControl]="cnaeAutoCompleteControl" placeholder="CNAE" matInput [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          @for (option of cnaeFilteredOption | async; track option) {
+            <mat-option (onSelectionChange)="onAddCnae(option)" >{{option.description}}</mat-option>
+          }
+        </mat-autocomplete>
+        <mat-chip-grid aria-label="Enter fruits">
+          @for (cnae of filterFormModel.cnae; track cnae.code) {
+            <mat-chip-row
+              (removed)="onRemoveCnaeChip(cnae.code)"
+            >
+              {{cnae.description}}
+              <button matChipRemove [attr.aria-label]="'remove ' + cnae.description">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+          }
+        </mat-chip-grid>
+      </mat-form-field>
+
+      <mat-form-field style="margin-top: 20px; width: auto;">
+        <mat-label>Page size</mat-label>
+        <mat-select [(ngModel)]="filterFormModel.pageSize" (selectionChange)="onSelectPageSize($event)">
+          <mat-option value="5">5</mat-option>
+          <mat-option value="10">10</mat-option>
+          <mat-option value="15">15</mat-option>
+          <mat-option value="20">20</mat-option>
+          <mat-option value="30">30</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button matButton="outlined" style="" (click)="applyFilter()">
+      <mat-progress-spinner
+        progressIndicator
+        mode="indeterminate"
+        diameter="20"
+        aria-label="Loading"
+        tabindex=""
+      />
+      <mat-icon>filter_alt</mat-icon>
+      Apply Filter
+    </button>
+  </mat-expansion-panel>
+
+</mat-accordion>

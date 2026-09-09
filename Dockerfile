@@ -1,0 +1,16 @@
+FROM node:22-alpine AS build
+
+ARG API_URL
+WORKDIR /app
+RUN npm install -g @angular/cli
+COPY ./ /app/
+ENV API_URL=$API_URL
+RUN npm install
+RUN ng build --configuration=production --define "API_URL='$API_URL'"
+
+
+FROM node:22-slim
+WORKDIR /app
+COPY --from=build /app/dist/lead-mail-manager-angular/ ./
+CMD ["node", "server/server.mjs"]
+
