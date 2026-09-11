@@ -8,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { environment } from '../../../environments/environment';
 import { TemplateResource, TemplateService } from './template.service';
 
 @Component({
@@ -30,7 +29,7 @@ export class Template implements OnInit {
 
   private readonly snackbar = inject(MatSnackBar);
 
-  private readonly url = environment.apiUrl + "/template";
+  private readonly url = API_URL + "/template";
 
   templateFormSignal = signal<TemplateResource>({
     name: '',

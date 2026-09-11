@@ -1,10 +1,9 @@
 import { httpResource } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
-import { MatListModule } from '@angular/material/list';
-import { environment } from '../../../environments/environment';
-import { Cnae, CompanyEmailFilter, ExecuteCampaignButton, FilterFormModel } from '../../shared';
 import { MatIconModule } from '@angular/material/icon';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Cnae, CompanyEmailFilter, ExecuteCampaignButton, FilterFormModel } from '../../shared';
 
 @Component({
   selector: 'app-email-search',
@@ -32,7 +31,7 @@ export class EmailSearch {
   });
 
   emailsResource = httpResource<EmailSearchResponse>(() => ({
-    url: environment.apiUrl + '/lead',
+    url: API_URL + '/lead',
     method: 'POST',
     body: this.emailSearchFilter(),
   }));

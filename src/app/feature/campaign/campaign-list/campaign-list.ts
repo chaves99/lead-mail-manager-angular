@@ -4,7 +4,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { environment } from '../../../../environments/environment';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -24,7 +23,7 @@ export class CampaignList implements OnInit {
 
   readonly router = inject(Router);
   campaignResource = httpResource<CampaignResponse[]>(() => ({
-    url: environment.apiUrl + "/campaign",
+    url: API_URL + "/campaign",
     method: 'GET'
   }));
 

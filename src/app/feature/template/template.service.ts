@@ -1,7 +1,6 @@
 import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
 
 @Service()
 export class TemplateService {
@@ -9,20 +8,20 @@ export class TemplateService {
   private readonly http = inject(HttpClient);
 
   public create(body: TemplateResource): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/template`, body);
+    return this.http.post(`${API_URL}/template`, body);
   }
 
   public delete(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/template/${id}`);
+    return this.http.delete(`${API_URL}/template/${id}`);
   }
 
   public test(id: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/template/test/${id}`);
+    return this.http.get(`${API_URL}/template/test/${id}`);
   }
 
   public fetch() {
     return httpResource<TemplateResource[]>(() => ({
-      url: `${environment.apiUrl}/template`,
+      url: `${API_URL}/template`,
       method: 'GET',
     }));
   }

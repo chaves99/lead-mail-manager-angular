@@ -16,7 +16,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { map, Observable, startWith } from 'rxjs';
-import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-company-email-filter',
@@ -61,7 +60,7 @@ export class CompanyEmailFilter {
 
   cnaeAutoCompleteControl = new FormControl();
   cnaeResource = httpResource<Cnae[]>(() => ({
-    url: environment.apiUrl + "/cnae",
+    url: API_URL + "/cnae",
     method: 'GET'
   }));
   cnaeFilteredOption: Observable<Cnae[]>;
