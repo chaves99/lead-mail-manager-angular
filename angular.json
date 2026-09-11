@@ -74,7 +74,12 @@
               "buildTarget": "lead-mail-manager-angular:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "allowedHosts": [
+              "lead-mail-manager-angular-production.up.railway.app"
+            ]
+          }
         },
         "test": {
           "builder": "@angular/build:unit-test"

@@ -7,10 +7,6 @@ export const routes: Routes = [
     redirectTo: 'email-search',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'company',
-  //   component: Company
-  // },
   {
     path: 'email-search',
     component: EmailSearch
