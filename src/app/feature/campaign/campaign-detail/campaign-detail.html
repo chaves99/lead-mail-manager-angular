@@ -1,1 +1,25 @@
-<p>campaign-detail works!</p>
+<div style="padding: 30px;">
+  @if (campaignResource.isLoading()) {
+    <div style="display: flex; justify-content: center;">
+      <mat-spinner mode="indeterminate"></mat-spinner>
+    </div>
+  } @else if (campaignResource.hasValue()) {
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{campaignResource.value().campaign.description}}</mat-card-title>
+        <mat-card-subtitle>{{campaignResource.value().campaign.createdAt | date: 'short' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content style="font-size: 1.2em;">
+        <p>Total: {{campaignResource.value().campaign.rowCount}}</p>
+        <p>Success: {{campaignResource.value().rowsTotal.success}}</p>
+        <p>Error: {{campaignResource.value().rowsTotal.error}}</p>
+        <p>Clicked: {{campaignResource.value().rowsTotal.clicked}}</p>
+        <p>Opened: {{campaignResource.value().rowsTotal.opened}}</p>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <button style="margin-top: 20px;" matButton="outlined" (click)="location.back()">
+    Back
+  </button>
+</div>

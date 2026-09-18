@@ -34,6 +34,7 @@ import { map, Observable, startWith } from 'rxjs';
     MatProgressSpinner,
     MatAutocompleteModule,
     MatButtonToggleModule,
+    MatCheckboxModule,
     AsyncPipe
   ],
   providers: [
@@ -203,6 +204,7 @@ export interface FilterFormModel {
   cnae: Cnae[];
   motherBranchId?: number;
   sentQuantity?: number;
+  shouldFetchUnsubscribed?: boolean;
 }
 
 export interface Cnae {

@@ -4,8 +4,7 @@ import { EmailSearch } from './feature/email-search/email-search';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'email-search',
-    pathMatch: 'full'
+    loadComponent: () => import('./feature/dashboard/dashboard').then(m => m.Dashboard)
   },
   {
     path: 'email-search',
@@ -19,9 +18,9 @@ export const routes: Routes = [
     path: 'campaign',
     loadComponent: () => import('./feature/campaign/').then(m => m.CampaignList)
   },
-  // {
-  //   path: 'campaign/:id',
-  //   loadComponent: () => import('./feature/campaign/').then(m => m.CampaignDetail)
-  // },
+  {
+    path: 'campaign/:id',
+    loadComponent: () => import('./feature/campaign/').then(m => m.CampaignDetail)
+  },
 ];
 

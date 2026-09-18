@@ -107,6 +107,10 @@
         <mat-button-toggle (click)="onUpdateMotherBranch(2)">Branch</mat-button-toggle>
       </mat-button-toggle-group>
 
+      <!-- MOTHER/BRANCH COMPANY -->
+      <mat-checkbox [(ngModel)]="filterFormModel.shouldFetchUnsubscribed">Fetch unsubscribed.</mat-checkbox>
+
+
       <!-- CNAE -->
       <mat-form-field style="width: 100%">
         <!-- <mat-label>CNAE</mat-label> -->

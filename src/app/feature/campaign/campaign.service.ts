@@ -11,6 +11,10 @@ export class CampaignService {
   public executeCampaign(body: CampaignExecution): Observable<any> {
     return this.http.post(`${API_URL}/campaign`, body);
   }
+
+  public undo(id: number) {
+    return this.http.put(`${API_URL}/campaign/${id}/undo`, {});
+  }
 }
 
 export interface CampaignExecution {

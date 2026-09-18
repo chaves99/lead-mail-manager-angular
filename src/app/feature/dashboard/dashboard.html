@@ -1,0 +1,34 @@
+<div style="padding: 40px;">
+  <mat-card appearance="raised">
+    <mat-card-header>
+      <mat-card-title>Totals</mat-card-title>
+      <!-- <mat-card-subtitle>Herding group</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-card-content>
+      @if (totalsResource.isLoading()) {
+        <div style="padding: 20px;display: flex; justify-content: center; margin-top: 20px; margin-bottom: 20px;">
+          <mat-spinner></mat-spinner>
+        </div>
+      } @else if (totalsResource.hasValue()) {
+        <p>Emails registered: {{totalsResource.value().registered}}</p>
+        <p>Emails sent: {{totalsResource.value().sent}}</p>
+        <p>Emails opened: {{totalsResource.value().opened}}</p>
+        <p>Emails clicked: {{totalsResource.value().clicked}}</p>
+        <p>Unsubscribed: {{totalsResource.value().unsubscribed}}</p>
+      }@else {
+        <div style="padding: 20px;display: flex; justify-content: center;">
+          <button matFab extended style="margin: auto;" (click)="totalsResource.reload()">
+            <mat-icon>refresh</mat-icon>
+            Reload
+          </button>
+        </div>
+      }
+    </mat-card-content>
+    <mat-card-actions>
+        <button matFab extended style="margin: auto;" (click)="totalsResource.reload()">
+          <mat-icon>refresh</mat-icon>
+          Reload
+        </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
