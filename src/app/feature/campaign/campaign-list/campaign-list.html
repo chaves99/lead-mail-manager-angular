@@ -1,4 +1,15 @@
 <div style="padding: 50px;">
+  <div style="display: flex; align-items: center; padding: 5px;">
+    <button matButton="outlined" (click)="campaignResource.reload()">
+      Reload
+    </button>
+    <button (click)="onPreviosPage()" matMiniFab style="margin-left: 20px;">
+      <mat-icon fontIcon="keyboard_arrow_left"></mat-icon>
+    </button>
+    <button (click)="onNextPage()" matMiniFab style="margin-left: 5px;">
+      <mat-icon fontIcon="keyboard_arrow_right"></mat-icon>
+    </button>
+  </div>
   @if (campaignResource.hasValue()) {
     <table mat-table [dataSource]="campaignResource.value()" class="mat-elevation-z8">
 
@@ -65,8 +76,5 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   }
-  <button matButton="outlined" (click)="campaignResource.reload()" style="margin-top: 10px">
-    Reload
-  </button>
 </div>
 

@@ -1,13 +1,13 @@
 import { DatePipe } from '@angular/common';
 import { httpResource } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { Router, RouterLink } from '@angular/router';
 import { CampaignService } from '../campaign.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-campaign-list',
@@ -29,11 +29,17 @@ export class CampaignList implements OnInit {
   private readonly campaignService = inject(CampaignService);
   private readonly snackbar = inject(MatSnackBar);
 
+  lastId = signal<number>(0);
+
+  lastIdHistory: number[] = [0];
 
   campaignResource = httpResource<CampaignResponse[]>(() => ({
-    url: API_URL + "/campaign",
+    url: API_URL + `/campaign?lastId=${this.lastId()}`,
     method: 'GET'
   }));
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
@@ -50,6 +56,33 @@ export class CampaignList implements OnInit {
         this.snackbar.open(`Erro when undo campaign!`, "OK", { duration: 9000, })
       }
     });
+  }
+
+  onNextPage() {
+    const values = this.campaignResource.value();
+    if (values) {
+      this.lastId.set(Math.min(...values.map(c => c.id)));
+      console.log(Math.min(...values.map(c => c.id)));
+      this.lastIdHistory.push(Math.min(...values.map(c => c.id)));
+      console.log(this.lastIdHistory);
+    }
+  }
+
+  onPreviosPage() {
+    const length = this.lastIdHistory.length;
+    if (length == 0) {
+      this.lastIdHistory.push(0);
+    } else if (length == 1) {
+      this.lastId.set(0);
+    } else if (length == 2) {
+      this.lastIdHistory.pop();
+      const last = this.lastIdHistory[0];
+      this.lastId.set(last!);
+    } else {
+      this.lastIdHistory.pop();
+      const last = this.lastIdHistory[this.lastIdHistory.length - 1];
+      this.lastId.set(last!);
+    }
   }
 }
 
