@@ -11,10 +11,27 @@
       </mat-card-header>
       <mat-card-content style="font-size: 1.2em;">
         <p>Total: {{campaignResource.value().campaign.rowCount}}</p>
-        <p>Success: {{campaignResource.value().rowsTotal.success}}</p>
-        <p>Error: {{campaignResource.value().rowsTotal.error}}</p>
         <p>Clicked: {{campaignResource.value().rowsTotal.clicked}}</p>
-        <p>Opened: {{campaignResource.value().rowsTotal.opened}}</p>
+        <p style="margin-bottom: 35px;">Opened: {{campaignResource.value().rowsTotal.opened}}</p>
+
+        Status:
+        <div style="padding-left: 10px; margintop: 5px;">
+          <p>
+            Pending: {{ campaignResource.value().rowsTotal.pending }}
+          </p>
+          <p>
+            Delivered: {{ campaignResource.value().rowsTotal.delivered }}
+          </p>
+          <p>
+            Bounced: {{ campaignResource.value().rowsTotal.bounced }}
+          </p>
+          <p>
+            Complained: {{ campaignResource.value().rowsTotal.complained }}
+          </p>
+          <p>
+            Unknow error: {{ campaignResource.value().rowsTotal.unknowError }}
+          </p>
+        </div>
       </mat-card-content>
     </mat-card>
   }

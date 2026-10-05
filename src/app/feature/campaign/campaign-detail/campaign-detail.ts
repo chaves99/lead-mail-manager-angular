@@ -47,8 +47,11 @@ interface CampaignDetailResponse {
   };
   templateName: string;
   rowsTotal: {
-    success: number;
-    error: number;
+    pending: number;
+    delivered: number;
+    bounced: number;
+    complained: number;
+    unknowError: number;
     opened: number;
     clicked: number;
   }
