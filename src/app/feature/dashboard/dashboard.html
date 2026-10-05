@@ -15,6 +15,7 @@
         <p>Emails opened: {{totalsResource.value().opened}}</p>
         <p>Emails clicked: {{totalsResource.value().clicked}}</p>
         <p>Unsubscribed: {{totalsResource.value().unsubscribed}}</p>
+        <p>Unreachable: {{totalsResource.value().unreachable}}</p>
       }@else {
         <div style="padding: 20px;display: flex; justify-content: center;">
           <button matFab extended style="margin: auto;" (click)="totalsResource.reload()">
