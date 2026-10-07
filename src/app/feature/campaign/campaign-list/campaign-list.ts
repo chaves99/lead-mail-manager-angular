@@ -52,7 +52,6 @@ export class CampaignList implements OnInit {
     this.campaignService.undo(id).subscribe({
       next: () => this.snackbar.open("Campaign undid successfully!", "OK", { duration: 5000 }),
       error: r => {
-        console.log(r);
         this.snackbar.open(`Erro when undo campaign!`, "OK", { duration: 9000, })
       }
     });
@@ -62,9 +61,7 @@ export class CampaignList implements OnInit {
     const values = this.campaignResource.value();
     if (values) {
       this.lastId.set(Math.min(...values.map(c => c.id)));
-      console.log(Math.min(...values.map(c => c.id)));
       this.lastIdHistory.push(Math.min(...values.map(c => c.id)));
-      console.log(this.lastIdHistory);
     }
   }
 

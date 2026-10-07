@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { httpResource } from '@angular/common/http';
 import { Component, output, viewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,14 +33,12 @@ import { map, Observable, startWith } from 'rxjs';
     MatProgressSpinner,
     MatAutocompleteModule,
     MatButtonToggleModule,
-    MatCheckboxModule,
-    AsyncPipe
+    MatCheckboxModule
   ],
   providers: [
     provideNativeDateAdapter()
   ],
   templateUrl: './company-email-filter.html',
-  styleUrl: './company-email-filter.css',
 })
 export class CompanyEmailFilter {
 
@@ -54,9 +51,6 @@ export class CompanyEmailFilter {
     pageSize: 10,
     emailExclude: [],
     emailInclude: [],
-    fantasyNameExclude: [],
-    fantasyNameInclude: [],
-    cnae: []
   };
 
   cnaeAutoCompleteControl = new FormControl();
@@ -93,10 +87,6 @@ export class CompanyEmailFilter {
   applyFilter(): void {
     this.accordion().closeAll();
     this.filterOutput.emit(this.filterFormModel);
-  }
-
-  onUpdateMotherBranch(motherBranch: number) {
-    this.filterFormModel.motherBranchId = motherBranch;
   }
 
   onSelectPageSize(event: MatSelectChange<any>) {
@@ -144,54 +134,6 @@ export class CompanyEmailFilter {
     event.chipInput.clear();
   }
 
-  // ###################################
-  // ### FANTASY NAME FILTER METHODS ###
-  // ###################################
-
-  onRemoveFantasyNameIncludeKeyword(keyword: string) {
-    const keywords = this.filterFormModel.fantasyNameInclude;
-    const index = keywords.indexOf(keyword);
-    if (index >= 0) {
-      keywords.splice(index, 1);
-      this.filterFormModel.fantasyNameInclude = [...keywords];
-    }
-
-  }
-
-  onRemoveFantasyNameExcludeKeyword(keyword: string) {
-    const keywords = this.filterFormModel.fantasyNameExclude;
-    const index = keywords.indexOf(keyword);
-    if (index >= 0) {
-      keywords.splice(index, 1);
-      this.filterFormModel.fantasyNameExclude = [...keywords];
-    }
-
-  }
-
-  onAddFantasyNameExcludeKeyword(event: MatChipInputEvent) {
-    const value = (event.value || '').trim();
-    if (value) {
-      this.filterFormModel.fantasyNameExclude = [...this.filterFormModel.fantasyNameExclude, value];
-    }
-    event.chipInput.clear();
-  }
-
-  onAddFantasyNameIncludeKeyword(event: MatChipInputEvent) {
-    const value = (event.value || '').trim();
-    if (value) {
-      this.filterFormModel.fantasyNameInclude = [...this.filterFormModel.fantasyNameInclude, value];
-    }
-    event.chipInput.clear();
-  }
-
-  onAddCnae(cnae: Cnae) {
-    this.filterFormModel.cnae = [...this.filterFormModel.cnae, cnae];
-    this.cnaeAutoCompleteControl.patchValue('');
-  }
-
-  onRemoveCnaeChip(code: number) {
-    this.filterFormModel.cnae = this.filterFormModel.cnae.filter(c => c.code !== code);
-  }
 }
 
 export interface FilterFormModel {
@@ -199,10 +141,6 @@ export interface FilterFormModel {
   pageSize: number;
   emailExclude: string[];
   emailInclude: string[];
-  fantasyNameExclude: string[];
-  fantasyNameInclude: string[];
-  cnae: Cnae[];
-  motherBranchId?: number;
   sentQuantity?: number;
   shouldFetchUnsubscribed?: boolean;
 }

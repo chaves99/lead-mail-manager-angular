@@ -28,7 +28,6 @@ export class Dashboard implements OnInit {
   })).value();
 
   ngOnInit(): void {
-    console.log(this.totalsResource.value());
   }
 }
 
