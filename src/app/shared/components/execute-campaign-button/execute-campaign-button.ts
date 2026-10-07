@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CampaignExecution, CampaignService } from '../../../feature/campaign/campaign.service';
-import { EmailSearchFilter } from '../../../feature/email-search/email-search';
+import { EmailSearchFilter } from '../../../feature/lead/lead';
 import { TemplateResource, TemplateService } from '../../../feature/template';
 
 @Component({

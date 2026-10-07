@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { EmailSearch } from './feature/email-search/email-search';
+import { Lead } from './feature/lead/lead';
 
 export const routes: Routes = [
   {
@@ -8,7 +8,7 @@ export const routes: Routes = [
   },
   {
     path: 'email-search',
-    component: EmailSearch
+    component: Lead
   },
   {
     path: 'template',

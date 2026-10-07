@@ -1,10 +1,12 @@
-import { httpResource } from '@angular/common/http';
-import { Component, signal } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CompanyEmailFilter, ExecuteCampaignButton, FilterFormModel } from '../../shared';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-email-search',
@@ -15,11 +17,14 @@ import { CompanyEmailFilter, ExecuteCampaignButton, FilterFormModel } from '../.
     CompanyEmailFilter,
     ExecuteCampaignButton,
     MatProgressBarModule,
+    MatMenuModule
   ],
-  templateUrl: './email-search.html',
-  styleUrl: './email-search.css',
+  templateUrl: './lead.html',
 })
-export class EmailSearch {
+export class Lead {
+
+  private readonly snackbar = inject(MatSnackBar);
+  private readonly http = inject(HttpClient);
 
   emailSearchFilter = signal<EmailSearchFilter>({
     emailExclude: [],
@@ -28,7 +33,6 @@ export class EmailSearch {
     pageSize: 100,
     companyPerEmail: 1,
   });
-
   lastIdHistory: number[] = [0];
 
   emailsResource = httpResource<EmailSearchResponse>(() => ({
@@ -76,12 +80,24 @@ export class EmailSearch {
     });
   }
 
+  onDelete(id: number) {
+    console.log("trying to delete: " + id);
+    this.http.delete(`${API_URL}/lead/${id}`).subscribe({
+      next: () => {
+        this.snackbar.open("Excluido com sucesso!", "OK", { duration: 4000 });
+        this.emailsResource.reload();
+      },
+      error: () => {
+        this.snackbar.open("Erro ao excluir!", "OK", { duration: 4000 });
+      }
+    });
+  }
 
 }
 
 interface EmailSearchResponse {
   total: number;
-  list: { id: number, email: string, count: number }[];
+  list: { id: number, email: string }[];
 }
 
 export interface EmailSearchFilter {

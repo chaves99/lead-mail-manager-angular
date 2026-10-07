@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmailSearchFilter } from '../email-search/email-search';
+import { EmailSearchFilter } from '../lead/lead';
 
 @Service()
 export class CampaignService {

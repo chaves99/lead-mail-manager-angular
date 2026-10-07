@@ -24,7 +24,18 @@
       <mat-list>
         @for(email of emailsResource.value().list; track $index) {
           <mat-list-item>
-            {{ email.id }} - {{ email.email }} - {{ email.count }}
+            <div style="display: flex; align-items: center;">
+              <button matIconButton [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button (click)="onDelete(email.id)" mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+              {{ email.email }}
+            </div>
           </mat-list-item>
         }
       </mat-list>

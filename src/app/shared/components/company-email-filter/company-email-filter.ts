@@ -1,6 +1,5 @@
-import { httpResource } from '@angular/common/http';
 import { Component, output, viewChild } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -14,7 +13,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-company-email-filter',
@@ -53,35 +51,7 @@ export class CompanyEmailFilter {
     emailInclude: [],
   };
 
-  cnaeAutoCompleteControl = new FormControl();
-  cnaeResource = httpResource<Cnae[]>(() => ({
-    url: API_URL + "/cnae",
-    method: 'GET'
-  }));
-  cnaeFilteredOption: Observable<Cnae[]>;
-
   constructor() {
-    this.cnaeFilteredOption = this.cnaeAutoCompleteControl.valueChanges.pipe(
-      startWith(''),
-      map(value => {
-        const name = typeof value === 'string' ? value : value?.description;
-        if (name) {
-          return this._filter(name as string);
-        }
-        if (this.cnaeResource.hasValue()) {
-          return this.cnaeResource.value();
-        }
-
-        return [];
-      }),
-    );
-  }
-
-  private _filter(value: string): Cnae[] {
-    const filterValue = value.toLowerCase();
-    if (this.cnaeResource.hasValue())
-      return this.cnaeResource.value().filter(option => option.description.toLowerCase().includes(filterValue));
-    return [];
   }
 
   applyFilter(): void {
@@ -143,9 +113,4 @@ export interface FilterFormModel {
   emailInclude: string[];
   sentQuantity?: number;
   shouldFetchUnsubscribed?: boolean;
-}
-
-export interface Cnae {
-  code: number;
-  description: string;
 }
