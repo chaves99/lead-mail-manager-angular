@@ -32,7 +32,7 @@ export class EmailSearch {
   lastIdHistory: number[] = [0];
 
   emailsResource = httpResource<EmailSearchResponse>(() => ({
-    url: API_URL + '/lead',
+    url: API_URL + '/lead/search',
     method: 'POST',
     body: this.emailSearchFilter(),
   }));
