@@ -1,35 +1,79 @@
 <div style="padding: 40px;">
-  <mat-card appearance="raised">
-    <mat-card-header>
-      <mat-card-title>Totals</mat-card-title>
-      <!-- <mat-card-subtitle>Herding group</mat-card-subtitle> -->
-    </mat-card-header>
-    <mat-card-content>
-      @if (totalsResource.isLoading()) {
-        <div style="padding: 20px;display: flex; justify-content: center; margin-top: 20px; margin-bottom: 20px;">
-          <mat-spinner></mat-spinner>
+  @if (totalsResource.isLoading()) {
+    <div style="padding: 20px;display: flex; justify-content: center; margin-top: 20px; margin-bottom: 20px;">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else if (totalsResource.hasValue()) {
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Totals</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="total-content">
+          <div>
+            <span>Emails registered:</span>
+            <br/>
+            {{totalsResource.value().registered}}
+          </div>
+          <div>
+            <span>Emails sent:</span>
+            <br/>
+            {{totalsResource.value().sent}}
+          </div>
+          <div>
+            <span>Emails opened:</span>
+            <br/>
+            {{totalsResource.value().opened}}
+          </div>
+          <div>
+            <span>Emails clicked:</span>
+            <br/>
+            {{totalsResource.value().clicked}}
+          </div>
+          <div>
+            <span>Unsubscribed:</span>
+            <br/>
+            {{totalsResource.value().unsubscribed}}
+          </div>
+          <div>
+            <span>Unreachable:</span>
+            <br/>
+            {{totalsResource.value().unreachable}}
+          </div>
         </div>
-      } @else if (totalsResource.hasValue()) {
-        <p>Emails registered: {{totalsResource.value().registered}}</p>
-        <p>Emails sent: {{totalsResource.value().sent}}</p>
-        <p>Emails opened: {{totalsResource.value().opened}}</p>
-        <p>Emails clicked: {{totalsResource.value().clicked}}</p>
-        <p>Unsubscribed: {{totalsResource.value().unsubscribed}}</p>
-        <p>Unreachable: {{totalsResource.value().unreachable}}</p>
-      }@else {
-        <div style="padding: 20px;display: flex; justify-content: center;">
-          <button matFab extended style="margin: auto;" (click)="totalsResource.reload()">
-            <mat-icon>refresh</mat-icon>
-            Reload
-          </button>
+      </mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Percentuais</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="total-content">
+          <div>
+            <span>Opened/sent:</span>
+            <br/>
+            {{ calcPercentage(totalsResource.value().sent, totalsResource.value().opened) | percent: '1.2' }}
+          </div>
+          <div>
+            <span>Clicked/sent:</span>
+            <br/>
+            {{ calcPercentage(totalsResource.value().sent, totalsResource.value().clicked) | percent: '1.2' }}
+          </div>
+          <div>
+            <span>Clicked/opened:</span>
+            <br/>
+            {{ calcPercentage(totalsResource.value().opened, totalsResource.value().clicked) | percent: '1.2' }}
+          </div>
         </div>
-      }
-    </mat-card-content>
+      </mat-card-content>
+    </mat-card>
+  }
+  <div class="reload-button-container">
     <mat-card-actions>
         <button matFab extended style="margin: auto;" (click)="totalsResource.reload()">
           <mat-icon>refresh</mat-icon>
           Reload
         </button>
     </mat-card-actions>
-  </mat-card>
+  </div>
 </div>

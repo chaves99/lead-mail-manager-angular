@@ -1,7 +1,9 @@
+import { DecimalPipe, PercentPipe } from '@angular/common';
 import { httpResource } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -11,9 +13,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatCardModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule,
+    DecimalPipe,
+    PercentPipe
   ],
-  templateUrl: './dashboard.html'
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.css'
 })
 export class Dashboard implements OnInit {
 
@@ -28,6 +34,10 @@ export class Dashboard implements OnInit {
   })).value();
 
   ngOnInit(): void {
+  }
+
+  public calcPercentage(whole: number, part: number): number {
+    return part / whole;
   }
 }
 

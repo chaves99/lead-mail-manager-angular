@@ -1,0 +1,37 @@
+mat-card {
+  margin-bottom: 30px;
+}
+
+.total-content {
+  padding: 10px;
+  display: inline-block;
+}
+
+.total-content div {
+  /* border-left: 1px solid white; */
+  display: inline-block;
+  padding-right: 20px;
+  padding: 20px;
+  flex: 1 1 auto;
+  font-size: 16px;
+}
+
+.total-content div span {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.reload-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* padding: 30px; */
+}
+
+@media screen and (min-width: 880px) {
+  .total-content {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
