@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 mat-card {
   margin-bottom: 30px;
 }
@@ -28,7 +30,7 @@ mat-card {
   /* padding: 30px; */
 }
 
-@media screen and (min-width: 880px) {
+@media screen and (min-width: 1150px) {
   .total-content {
     padding: 10px;
     display: flex;
