@@ -4,6 +4,7 @@
       <mat-spinner></mat-spinner>
     </div>
   } @else if (totalsResource.hasValue()) {
+    <!-- LEADS CARD  -->
     <mat-card appearance="raised">
       <mat-card-header>
         <mat-card-title>Leads</mat-card-title>
@@ -53,6 +54,8 @@
         </div>
       </mat-card-content>
     </mat-card>
+
+    <!-- EMAILS CARD  -->
     <mat-card appearance="raised">
       <mat-card-header>
         <mat-card-title>E-mails</mat-card-title>
@@ -88,6 +91,42 @@
             <span>Opened:</span>
             <br/>
             {{ totalsResource.value().emails.opened | number }}
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- PERCENTAGE CARD  -->
+    <mat-card appearance="raised">
+      <mat-card-header>
+        <mat-card-title>E-mail Percentages</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="total-content">
+          <div>
+            <span>Successful rate:</span>
+            <br/>
+            {{ calcPercentage(totalsResource.value().emails.total, totalsResource.value().emails.success) | percent : '1.2' }}
+          </div>
+          <div>
+            <span>Successful/opened(E-mails):</span>
+            <br/>
+            {{ calcPercentage(totalsResource.value().emails.success, totalsResource.value().emails.opened) | percent : '1.2' }}
+          </div>
+          <div>
+            <span>Successful/clicked(E-mails):</span>
+            <br/>
+            {{ calcPercentage(totalsResource.value().emails.success, totalsResource.value().emails.clicked) | percent : '1.2'}}
+          </div>
+          <div>
+            <span>Successful/opened(Leads):</span>
+            <br/>
+            {{ calcPercentage(totalsResource.value().leads.emailed, totalsResource.value().leads.leadsOpened) | percent : '1.2'}}
+          </div>
+          <div>
+            <span>Successful/clicked(Leads):</span>
+            <br/>
+            {{ calcPercentage(totalsResource.value().leads.emailed, totalsResource.value().leads.leadsClicked) | percent : '1.2'}}
           </div>
         </div>
       </mat-card-content>
