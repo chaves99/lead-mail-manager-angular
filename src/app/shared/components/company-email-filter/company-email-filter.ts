@@ -113,4 +113,5 @@ export interface FilterFormModel {
   emailInclude: string[];
   sentQuantity?: number;
   shouldFetchUnsubscribed?: boolean;
+  emailOpened?: boolean;
 }

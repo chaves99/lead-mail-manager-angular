@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmailSearchFilter } from '../lead/lead';
+import { FilterFormModel } from '../../shared';
 
 @Service()
 export class CampaignService {
@@ -21,5 +21,5 @@ export interface CampaignExecution {
   description: string;
   templateId: number;
   limit?: number;
-  filter: EmailSearchFilter;
+  filter: FilterFormModel;
 }

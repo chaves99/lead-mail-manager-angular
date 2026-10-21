@@ -26,12 +26,11 @@ export class Lead {
   private readonly snackbar = inject(MatSnackBar);
   private readonly http = inject(HttpClient);
 
-  emailSearchFilter = signal<EmailSearchFilter>({
+  emailSearchFilter = signal<FilterFormModel>({
     emailExclude: [],
     emailInclude: [],
     lastIndex: 0,
     pageSize: 100,
-    companyPerEmail: 1,
   });
   lastIdHistory: number[] = [0];
 
@@ -43,7 +42,7 @@ export class Lead {
 
   onApplyFilter(filter: FilterFormModel): void {
     this.emailSearchFilter.update(() => {
-      return { ...filter, companyPerEmail: this.emailSearchFilter().companyPerEmail };
+      return { ...filter };
     });
     this.emailsResource.reload();
   }
@@ -100,10 +99,3 @@ interface EmailSearchResponse {
   list: { id: number, email: string }[];
 }
 
-export interface EmailSearchFilter {
-  lastIndex: number;
-  pageSize: number;
-  emailExclude: string[];
-  emailInclude: string[];
-  companyPerEmail?: number;
-}
