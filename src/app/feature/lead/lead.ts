@@ -7,6 +7,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CompanyEmailFilter, ExecuteCampaignButton, FilterFormModel } from '../../shared';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 @Component({
   selector: 'app-email-search',
@@ -17,7 +19,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CompanyEmailFilter,
     ExecuteCampaignButton,
     MatProgressBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDividerModule
   ],
   templateUrl: './lead.html',
 })
@@ -31,6 +34,7 @@ export class Lead {
     emailInclude: [],
     lastIndex: 0,
     pageSize: 100,
+    names: [],
   });
   lastIdHistory: number[] = [0];
 
@@ -96,6 +100,6 @@ export class Lead {
 
 interface EmailSearchResponse {
   total: number;
-  list: { id: number, email: string }[];
+  list: { id: number, name?: string, email: string }[];
 }
 

@@ -5,18 +5,38 @@
     </mat-expansion-panel-header>
     <div style="padding: 30px;">
 
+      <!-- NAME FILTER -->
+      <mat-form-field style="width: 100%">
+        <mat-label>Names filter</mat-label>
+        <mat-chip-grid #chipGridNames>
+          @for (keyword of filterFormModel.names; track keyword) {
+            <mat-chip-row (removed)="onRemoveNameKeyword(keyword)">
+              {{keyword}}
+            <button matChipRemove [attr.aria-label]="'remove template form' + keyword">
+              <mat-icon>cancel</mat-icon>
+            </button>
+            </mat-chip-row>
+          }
+        </mat-chip-grid>
+        <input
+          placeholder="Enter the names to filter"
+          [matChipInputFor]="chipGridNames"
+          (matChipInputTokenEnd)="onAddNameKeyword($event)"
+        />
+      </mat-form-field>
+
       <!-- EMAIL EXCLUDE -->
       <mat-form-field style="width: 100%">
         <mat-label>Keywords to filter on email</mat-label>
         <mat-chip-grid #chipGridEmailExclude>
-        @for (keyword of filterFormModel.emailExclude; track keyword) {
-          <mat-chip-row (removed)="onRemoveEmailExcludeKeyword(keyword)">
-            {{keyword}}
-          <button matChipRemove [attr.aria-label]="'remove template form' + keyword">
-            <mat-icon>cancel</mat-icon>
-          </button>
-          </mat-chip-row>
-        }
+          @for (keyword of filterFormModel.emailExclude; track keyword) {
+            <mat-chip-row (removed)="onRemoveEmailExcludeKeyword(keyword)">
+              {{keyword}}
+            <button matChipRemove [attr.aria-label]="'remove template form' + keyword">
+              <mat-icon>cancel</mat-icon>
+            </button>
+            </mat-chip-row>
+          }
         </mat-chip-grid>
         <input
           placeholder="Enter the keyword to exclude from Email"
@@ -29,14 +49,14 @@
       <mat-form-field style="width: 100%">
         <mat-label>Keywords to search on email</mat-label>
         <mat-chip-grid #chipGridEmailInclude>
-        @for (keyword of filterFormModel.emailInclude; track keyword) {
-          <mat-chip-row (removed)="onRemoveEmailIncludeKeyword(keyword)">
-            {{keyword}}
-          <button matChipRemove [attr.aria-label]="'remove template form' + keyword">
-            <mat-icon>cancel</mat-icon>
-          </button>
-          </mat-chip-row>
-        }
+          @for (keyword of filterFormModel.emailInclude; track keyword) {
+            <mat-chip-row (removed)="onRemoveEmailIncludeKeyword(keyword)">
+              {{keyword}}
+            <button matChipRemove [attr.aria-label]="'remove template form' + keyword">
+              <mat-icon>cancel</mat-icon>
+            </button>
+            </mat-chip-row>
+          }
         </mat-chip-grid>
         <input
           placeholder="Enter the keyword to include"

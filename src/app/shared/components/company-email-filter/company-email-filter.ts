@@ -49,6 +49,7 @@ export class CompanyEmailFilter {
     pageSize: 10,
     emailExclude: [],
     emailInclude: [],
+    names: [],
   };
 
   constructor() {
@@ -104,6 +105,26 @@ export class CompanyEmailFilter {
     event.chipInput.clear();
   }
 
+  // ###################################
+  // ###### NAMES FILTER METHODS #######
+  // ###################################
+  onAddNameKeyword(event: MatChipInputEvent) {
+    const value = (event.value || '').trim();
+    if (value) {
+      this.filterFormModel.names = [...this.filterFormModel.names, value];
+    }
+    event.chipInput.clear();
+  }
+
+  onRemoveNameKeyword(keyword: string) {
+    const keywords = this.filterFormModel.names;
+    const index = keywords.indexOf(keyword);
+    if (index >= 0) {
+      keywords.splice(index, 1);
+      this.filterFormModel.names = [...keywords];
+    }
+
+  }
 }
 
 export interface FilterFormModel {
@@ -114,4 +135,5 @@ export interface FilterFormModel {
   sentQuantity?: number;
   shouldFetchUnsubscribed?: boolean;
   emailOpened?: boolean;
+  names: string[];
 }
