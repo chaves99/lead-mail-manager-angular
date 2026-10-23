@@ -136,4 +136,5 @@ export interface FilterFormModel {
   shouldFetchUnsubscribed?: boolean;
   emailOpened?: boolean;
   names: string[];
+  nameNotNull?: boolean;
 }
