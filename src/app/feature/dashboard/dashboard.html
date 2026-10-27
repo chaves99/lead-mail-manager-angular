@@ -4,6 +4,17 @@
       <mat-spinner></mat-spinner>
     </div>
   } @else if (totalsResource.hasValue()) {
+
+    <mat-form-field style="min-width: 300px;" appearance="outline">
+      <mat-label>Select</mat-label>
+      <mat-select [(ngModel)]="totalsResourceParamsValue">
+        <mat-option value="0">No template</mat-option>
+        @for (template of templateResource.value(); track template.id) {
+          <mat-option [value]="template.id">{{template.id}} - {{ template.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
     <!-- LEADS CARD  -->
     <mat-card appearance="raised">
       <mat-card-header>
@@ -11,46 +22,56 @@
       </mat-card-header>
       <mat-card-content>
         <div class="total-content">
-          <div>
+          <mat-card appearance="filled">
             <span>Total:</span>
             <br/>
             {{totalsResource.value().leads.totalLeads | number}}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Leads emailed:</span>
             <br/>
             {{totalsResource.value().leads.emailed | number}}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Total opened:</span>
             <br/>
             {{totalsResource.value().leads.totalOpened | number}}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Total clicked:</span>
             <br/>
             {{totalsResource.value().leads.totalClicked | number}}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Leads opened:</span>
             <br/>
             {{totalsResource.value().leads.leadsOpened | number}}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Leads clicked:</span>
             <br/>
             {{totalsResource.value().leads.leadsClicked | number}}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Unsubscribed:</span>
             <br/>
             {{totalsResource.value().leads.unsubscribed | number}}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Unreachable:</span>
             <br/>
             {{totalsResource.value().leads.unreachable | number}}
-          </div>
+          </mat-card>
+          <mat-card appearance="filled">
+            <span>Successful/opened(Leads):</span>
+            <br/>
+            {{ calcPercentage(totalsResource.value().leads.emailed, totalsResource.value().leads.leadsOpened) | percent : '1.2'}}
+          </mat-card>
+          <mat-card appearance="filled">
+            <span>Successful/clicked(Leads):</span>
+            <br/>
+            {{ calcPercentage(totalsResource.value().leads.emailed, totalsResource.value().leads.leadsClicked) | percent : '1.2'}}
+          </mat-card>
         </div>
       </mat-card-content>
     </mat-card>
@@ -62,72 +83,51 @@
       </mat-card-header>
       <mat-card-content>
         <div class="total-content">
-          <div>
+          <mat-card appearance="filled">
             <span>Total sent:</span>
             <br/>
             {{ totalsResource.value().emails.total | number }}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Pending:</span>
             <br/>
             {{ totalsResource.value().emails.pending | number }}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Successful:</span>
             <br/>
             {{ totalsResource.value().emails.success | number }}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Error:</span>
             <br/>
             {{ totalsResource.value().emails.error | number }}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Clicked:</span>
             <br/>
             {{ totalsResource.value().emails.clicked | number }}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Opened:</span>
             <br/>
             {{ totalsResource.value().emails.opened | number }}
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <!-- PERCENTAGE CARD  -->
-    <mat-card appearance="raised">
-      <mat-card-header>
-        <mat-card-title>E-mail Percentages</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="total-content">
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Successful rate:</span>
             <br/>
             {{ calcPercentage(totalsResource.value().emails.total, totalsResource.value().emails.success) | percent : '1.2' }}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Successful/opened(E-mails):</span>
             <br/>
             {{ calcPercentage(totalsResource.value().emails.success, totalsResource.value().emails.opened) | percent : '1.2' }}
-          </div>
-          <div>
+          </mat-card>
+          <mat-card appearance="filled">
             <span>Successful/clicked(E-mails):</span>
             <br/>
             {{ calcPercentage(totalsResource.value().emails.success, totalsResource.value().emails.clicked) | percent : '1.2'}}
-          </div>
-          <div>
-            <span>Successful/opened(Leads):</span>
-            <br/>
-            {{ calcPercentage(totalsResource.value().leads.emailed, totalsResource.value().leads.leadsOpened) | percent : '1.2'}}
-          </div>
-          <div>
-            <span>Successful/clicked(Leads):</span>
-            <br/>
-            {{ calcPercentage(totalsResource.value().leads.emailed, totalsResource.value().leads.leadsClicked) | percent : '1.2'}}
-          </div>
+          </mat-card>
         </div>
       </mat-card-content>
     </mat-card>

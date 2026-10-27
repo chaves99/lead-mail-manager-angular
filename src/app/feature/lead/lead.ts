@@ -84,7 +84,6 @@ export class Lead {
   }
 
   onDelete(id: number) {
-    console.log("trying to delete: " + id);
     this.http.delete(`${API_URL}/lead/${id}`).subscribe({
       next: () => {
         this.snackbar.open("Excluido com sucesso!", "OK", { duration: 4000 });
