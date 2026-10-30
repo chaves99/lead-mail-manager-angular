@@ -137,4 +137,5 @@ export interface FilterFormModel {
   emailOpened?: boolean;
   names: string[];
   nameNotNull?: boolean;
+  sentEmailBeforeDate?: Date;
 }

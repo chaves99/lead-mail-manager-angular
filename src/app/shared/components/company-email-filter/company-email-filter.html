@@ -73,8 +73,8 @@
 
       <!-- SINCE FROM DATE FIELD -->
       <mat-form-field style="margin-top: 5px;">
-        <mat-label>Email enviado apartir de</mat-label>
-        <input matInput [matDatepicker]="dp3" disabled>
+        <mat-label>Emails enviados antes de</mat-label>
+        <input matInput [(ngModel)]="filterFormModel.sentEmailBeforeDate" [matDatepicker]="dp3">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
         <mat-datepicker touchUi #dp3 disabled="false"></mat-datepicker>
