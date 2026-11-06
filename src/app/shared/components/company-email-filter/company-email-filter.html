@@ -5,8 +5,20 @@
     </mat-expansion-panel-header>
     <div style="padding: 30px;">
 
+      <!-- NULL/NOT NULL LEAD NAME FLAG -->
+      <mat-radio-group
+        color="accent"
+        style="border: 1px solid var(--mat-sys-outline-variant); padding: 15px; border-radius: 10px;"
+        [(ngModel)]="filterFormModel.nameTypeFilter">
+        <mat-radio-button value="NOT_NULL_NAME">Only leads with name.</mat-radio-button>
+        <mat-radio-button value="NULL_NAME">Only leads without name.</mat-radio-button>
+        <button matButton="" (click)="filterFormModel.nameTypeFilter = undefined">
+          Clean
+        </button>
+      </mat-radio-group>
+
       <!-- NAME FILTER -->
-      <mat-form-field style="width: 100%">
+      <mat-form-field style="width: 100%; margin-top: 10px;">
         <mat-label>Names filter</mat-label>
         <mat-chip-grid #chipGridNames>
           @for (keyword of filterFormModel.names; track keyword) {
@@ -25,14 +37,8 @@
         />
       </mat-form-field>
 
-      <!-- NOT NULL LEAD NAME FLAG -->
-      <mat-checkbox style="margin-bottom: 15px;" [(ngModel)]="filterFormModel.nameNotNull">
-        Only leads with name.
-      </mat-checkbox>
-
-
       <!-- EMAIL EXCLUDE -->
-      <mat-form-field style="width: 100%">
+      <mat-form-field style="width: 100%; margin-top: 10px;">
         <mat-label>Keywords to filter on email</mat-label>
         <mat-chip-grid #chipGridEmailExclude>
           @for (keyword of filterFormModel.emailExclude; track keyword) {

@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 
 @Component({
@@ -31,7 +32,8 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
     MatProgressSpinner,
     MatAutocompleteModule,
     MatButtonToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRadioModule
   ],
   providers: [
     provideNativeDateAdapter()
@@ -136,6 +138,6 @@ export interface FilterFormModel {
   shouldFetchUnsubscribed?: boolean;
   emailOpened?: boolean;
   names: string[];
-  nameNotNull?: boolean;
+  nameTypeFilter?: 'NULL_NAME' | 'NOT_NULL_NAME';
   sentEmailBeforeDate?: Date;
 }

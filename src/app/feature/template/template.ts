@@ -93,5 +93,14 @@ export class Template implements OnInit {
     });
   }
 
+  onClean(): void {
+    this.templateFormSignal.set({
+      body: '',
+      name: '',
+      subject: '',
+      id: undefined,
+    });
+  }
+
 }
 

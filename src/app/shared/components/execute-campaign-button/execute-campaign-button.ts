@@ -32,7 +32,6 @@ export class ExecuteCampaignButton {
     const templates = this.templatesFetch.value();
     this.templateDialog.open(TemplateDialogComponent, {
       data: templates,
-      width: '350px'
     }).afterClosed().subscribe(value => {
       const filter = this.filter();
       if (value !== undefined && value.templateId && value.description && filter) {
