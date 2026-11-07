@@ -32,7 +32,6 @@
   <mat-list role="list" class="list-container">
     @for(template of templates.value(); track template.id) {
       <mat-list-item role="listitem">
-        {{ template.name}} - {{ template.subject }}
         <button matIconButton [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
@@ -50,7 +49,7 @@
             Delete
           </button>
         </mat-menu>
-
+        {{ template.id }} - {{ template.name}} - {{ template.subject }}
       </mat-list-item>
     }
   </mat-list>
